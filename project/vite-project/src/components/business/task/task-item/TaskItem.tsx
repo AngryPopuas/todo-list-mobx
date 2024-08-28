@@ -1,9 +1,9 @@
 import { ITask } from "@/types"
 import TaskItemBtns from "./task-item-btns/TaskItemBtns"
+import { observer } from "mobx-react-lite"
 
 
-
-const TaskItem = ({ task, isSubTask }: { task: ITask, isSubTask: boolean }) => {
+const TaskItem = observer(({ task, isSubTask }: { task: ITask, isSubTask: boolean }) => {
 
 
 
@@ -18,6 +18,8 @@ const TaskItem = ({ task, isSubTask }: { task: ITask, isSubTask: boolean }) => {
         `}
             >
                 <div className="flex flex-row justify-between items-center">
+                    <button><div className={`w-4 h-4 rounded-full border border-[#4EA8DE] ${task.isSelected && 'bg-[#4EA8DE]'}`}></div></button>
+                    <div className="grow px-5"><h1 className={`font-light ${task.isDone ? 'line-through' : ''}`}>{task.title}</h1></div>
                     <TaskItemBtns task={task} />
                 </div>
                 {task.isOpen &&
@@ -34,6 +36,6 @@ const TaskItem = ({ task, isSubTask }: { task: ITask, isSubTask: boolean }) => {
             </div>
         </div >
     )
-}
+})
 
 export default TaskItem
