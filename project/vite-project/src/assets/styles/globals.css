@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --task-bg: 0, 0%, 50%;
     --header: 0, 0%, 100%;
     --input: 0, 0%, 15%;
     --background: 0 0% 100%;
@@ -34,6 +35,7 @@
   }
 
   .dark {
+    --task-bg: 0, 0%, 50%;
     --header: 0, 0%, 5%;
     --input: 0, 0%, 15%;
     --background: 0, 0%, 10%;

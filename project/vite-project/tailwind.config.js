@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        task: "hsl(var(--task-bg))",
         input: "hsl(var(--input))",
         header: "hsl(var(--header))",
         border: "hsl(var(--border))",
