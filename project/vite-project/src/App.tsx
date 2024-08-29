@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <div className='max-w-[1280px] h-[400px] mx-auto w-full flex flex-row gap-x-5 px-10 mt-5'>
+      <div className='max-w-[1360px] h-[400px] mx-auto w-full flex flex-row gap-x-5 px-10 mt-5'>
         <div className='flex-1 overflow-y-scroll'>
           <CreateTaskForm />
           <TaskList />

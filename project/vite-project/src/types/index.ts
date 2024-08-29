@@ -13,7 +13,6 @@ export interface ITask {
     isOpen: boolean,
     isEdit: boolean,
     subtasks: Array<ITask>,
-
 }
 
 export interface IStoreTasks {
