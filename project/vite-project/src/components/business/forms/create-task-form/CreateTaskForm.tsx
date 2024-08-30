@@ -34,11 +34,11 @@ const CreateTaskForm = () => {
     return (
         <form onSubmit={(e) => { handleCreateTask(e) }} className="flex flex-row items-center gap-x-5">
             <Input
-                placeholder="Enter task title"
+                placeholder="Заголовок задачи"
                 value={taskTitle}
                 onChange={(e) => { setTaskTitle(e.target.value) }}
             />
-            <Button disabled={!Boolean(taskTitle)}>Create</Button>
+            <Button disabled={!Boolean(taskTitle)}>Создать</Button>
         </form>
     )
 }

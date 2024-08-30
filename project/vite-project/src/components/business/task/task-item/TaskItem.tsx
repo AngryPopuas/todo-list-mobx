@@ -15,13 +15,12 @@ const TaskItem = observer(({ task, isSubTask }: { task: ITask, isSubTask: boolea
         <Accordion type="single" collapsible>
             <AccordionItem value="item-1" >
                 <div className="flex flex-col w-full items-center">
-                    <div
-                        className={`
+                    <div className={`
                             ${task.isDone ? 'opacity-70' : 'opacity-100'}
                             ${task.isOpen && 'border border-taskBorder'}
                             ${isSubTask ? 'bg-subtask w-[95%] ' : 'bg-task'}
-                            flex flex-col justify-between w-full p-5 mt-2 rounded-[8px] transition-all gap-y-5`}>
-
+                            flex flex-col justify-between w-full p-5 mt-2 rounded-[8px] transition-all gap-y-5`}
+                    >
                         <div className="flex flex-row justify-between items-center gap-x-5">
                             {task.subtasks.length > 0 ? <AccordionTrigger><ChevronDown color="#4EA8DE" /></AccordionTrigger> : <></>}
 
@@ -39,7 +38,6 @@ const TaskItem = observer(({ task, isSubTask }: { task: ITask, isSubTask: boolea
                             task.subtasks.map(subtask => <TaskItem key={subtask.id} isSubTask={true} task={subtask} />)
                         }
                     </AccordionContent>
-
                 </div>
             </AccordionItem>
         </Accordion>

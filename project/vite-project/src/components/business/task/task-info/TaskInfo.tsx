@@ -12,8 +12,10 @@ const TaskInfo = observer(() => {
                     currentTask
                         ?
                         <>
-                            <h2>{currentTask.title}</h2>
-                            <p>{currentTask.description}</p>
+                            <h2>Заголовок: {currentTask.title}</h2>
+                            <p>Описание: {currentTask.description}</p>
+                            <span>Создана: {currentTask.time.starts}</span>
+                            <span>Начинается: {currentTask.time.starts}</span>
                         </>
                         :
                         <h2>Выберите задачу для просмотра</h2>
