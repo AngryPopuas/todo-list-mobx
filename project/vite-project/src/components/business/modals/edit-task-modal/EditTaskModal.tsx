@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import { ITask } from "@/types"
 import { useState } from "react"
 import tasksStore from "@/store/taskStore"
+import { Textarea } from "@/components/ui/textarea"
 
 const EditTaskModal = ({ initialValues, handleClose }: { initialValues: ITask, handleClose: () => void }) => {
     const editTask = tasksStore.setEditTask
@@ -41,7 +42,8 @@ const EditTaskModal = ({ initialValues, handleClose }: { initialValues: ITask, h
                     onChange={(e) => setFormValues((formValues) => { return { ...formValues, title: e.target.value } })}
                     placeholder='Название задачи'
                 />
-                <Input
+                <Textarea
+                    style={{resize:'none'}}
                     value={formValues.description}
                     onChange={(e) => setFormValues((formValues) => { return { ...formValues, description: e.target.value } })}
                     placeholder='Описание задачи'

@@ -24,7 +24,7 @@ type CompleteTogglerProps = (
 
 export const CreateTaskUtil = (title: string) => {
     const currentDate = new Date()
-    const createdAtLocal = ` ${currentDate.getDate() < 9 ? '0' + currentDate.getDate() : currentDate.getDate()}/${currentDate.getMonth() < 9 ? '0' + currentDate.getMonth() : currentDate.getMonth()} в ${currentDate.getHours() < 9 ? '0' + currentDate.getHours() : currentDate.getHours()}:${currentDate.getMinutes() < 9 ? '0' + currentDate.getMinutes() : currentDate.getMinutes()}`
+    const createdAtLocal = ` ${currentDate.getDate() < 9 ? '0' + currentDate.getDate() : currentDate.getDate()}/${currentDate.getMonth() < 9 ? '0' + Number(currentDate.getMonth() + 1) : Number(currentDate.getMonth() + 1)} в ${currentDate.getHours() < 9 ? '0' + currentDate.getHours() : currentDate.getHours()}:${currentDate.getMinutes() < 9 ? '0' + currentDate.getMinutes() : currentDate.getMinutes()}`
     const createTask: ITask = {
         id: currentDate.getMilliseconds(),
         title: title,
@@ -169,15 +169,7 @@ export const SetEditTaskUtil = (array: ITask[], task: ITask) => {
         return arr;
     }, []);
 };
-// export const setOpenTaskForEdit = (array: ITask[]) => {
-//     return array.reduce((arr: ITask[], item) => {
-//         if (item.isSelected) {
-//             item.isDone = !item.isDone
-//         }
-//         arr.push({ ...item, subtasks: setDoneAllSelectedTasks(item.subtasks) });
-//         return arr;
-//     }, []);
-// };
+
 export const SetDoneAllSelectedTasksUtil = (array: ITask[]) => {
     return array.reduce((arr: ITask[], item) => {
         if (item.isSelected) {
@@ -187,19 +179,3 @@ export const SetDoneAllSelectedTasksUtil = (array: ITask[]) => {
         return arr;
     }, []);
 };
-// export const findSubTask: SearchProps = (id, array) => {
-//     for (let item of array) {
-//         if (item.id === id) {
-//             item.isDone = true
-//             return [item,];
-//         }
-
-//         const subItem = findSubTask(id, item.subtasks);
-
-//         if (subItem) {
-//             return [subItem];
-//         }
-//     }
-
-//     return null;
-// };

@@ -24,8 +24,14 @@ const TaskItem = observer(({ task, isSubTask }: { task: ITask, isSubTask: boolea
                         <div className="flex flex-row justify-between items-center gap-x-5">
                             {task.subtasks.length > 0 ? <AccordionTrigger><ChevronDown color="#4EA8DE" /></AccordionTrigger> : <></>}
 
-                            <button onClick={handleSelectTask}><div className={`w-4 h-4 rounded-full border border-[#4EA8DE] ${task.isSelected && 'bg-[#4EA8DE]'}`}></div></button>
-                            <div onClick={handleOpenTask} className="grow px-5"><h1 className={`font-light cursor-pointer ${task.isDone ? 'line-through' : ''}`}>{task.title}</h1></div>
+                            <button onClick={handleSelectTask}>
+                                <div className={`w-4 h-4 rounded-full border border-[#4EA8DE] ${task.isSelected && 'bg-[#4EA8DE]'}`}></div>
+                            </button>
+                            <div onClick={handleOpenTask} className="grow px-5">
+                                <h1 className={`font-light cursor-pointer ${task.isDone ? 'line-through' : ''}`}>
+                                    {task.title.length > 30 ? task.title.slice(0,30) + '...' : task.title}
+                                </h1>
+                            </div>
                         </div>
                         <div className="flex flex-row">
                             <TaskItemBtns task={task} />
@@ -34,8 +40,7 @@ const TaskItem = observer(({ task, isSubTask }: { task: ITask, isSubTask: boolea
 
                     <AccordionContent className="w-[95%]">
                         {
-                            task.subtasks.length > 0 &&
-                            task.subtasks.map(subtask => <TaskItem key={subtask.id} isSubTask={true} task={subtask} />)
+                            task.subtasks.length > 0 && task.subtasks.map(subtask => <TaskItem key={subtask.id} isSubTask={true} task={subtask} />)
                         }
                     </AccordionContent>
                 </div>

@@ -1,4 +1,3 @@
-import { ITask } from '@/types'
 import TaskItem from '../task-item/TaskItem'
 import { observer } from 'mobx-react-lite'
 

@@ -6,16 +6,19 @@ const TaskInfo = observer(() => {
     const currentTask = GetOpenedTaskUtil(tasksStore.tasks)
 
     return (
-        <div className="flex-1 rounded-md border border-input bg-header">
-            <div className="flex flex-col p-5">
+        <div className="h-full rounded-md border border-input bg-header">
+            <div className="p-5 relative">
                 {
                     currentTask
                         ?
                         <>
-                            <h2>Заголовок: {currentTask.title}</h2>
-                            <p>Описание: {currentTask.description}</p>
-                            <span>Создана: {currentTask.time.starts}</span>
-                            <span>Начинается: {currentTask.time.starts}</span>
+                            <div className="flex flex-row items-center justify-between">
+                                <h2 className="break-words">Заголовок: {currentTask.title.length > 30 ? currentTask.title.slice(0,30) + '...' : currentTask.title}</h2>
+                                <p>Создана: {currentTask.time.created}</p>
+                            </div>
+                            <div className="py-10 max-w-[400px] h-full overflow-y-hidden">
+                                <p className="break-words">Описание: {currentTask.description}</p>
+                            </div>
                         </>
                         :
                         <h2>Выберите задачу для просмотра</h2>

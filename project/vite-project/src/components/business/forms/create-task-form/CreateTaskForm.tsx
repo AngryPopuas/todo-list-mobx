@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 
 import tasksStore from "@/store/taskStore"
+import { CreateTaskUtil } from "@/utils/task"
 
 const CreateTaskForm = () => {
     const createTask = tasksStore.addTask
@@ -15,20 +16,7 @@ const CreateTaskForm = () => {
         
         if (!taskTitle) return;
 
-        createTask({
-            id: new Date().getTime(),
-            title: taskTitle,
-            description: '',
-            time: {
-                created: null,
-                starts: null,
-            },
-            isDone: false,
-            isSelected: false,
-            isOpen: false,
-            isEdit: false,
-            subtasks: [],
-        })
+        createTask(CreateTaskUtil(taskTitle))
 
     }
     return (
