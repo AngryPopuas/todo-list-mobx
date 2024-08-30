@@ -13,10 +13,10 @@ const TaskInfo = observer(() => {
                         ?
                         <>
                             <div className="flex flex-row items-center justify-between">
-                                <h2 className="break-words">Заголовок: {currentTask.title.length > 30 ? currentTask.title.slice(0,30) + '...' : currentTask.title}</h2>
+                                <h2 className="break-words">Заголовок: {currentTask.title.length > 30 ? currentTask.title.slice(0, 30) + '...' : currentTask.title}</h2>
                                 <p>Создана: {currentTask.time.created}</p>
                             </div>
-                            <div className="py-10 max-w-[400px] h-full overflow-y-hidden">
+                            <div className="py-10 max-w-[400px] max-h-[300px] overflow-y-hidden">
                                 <p className="break-words">Описание: {currentTask.description}</p>
                             </div>
                         </>

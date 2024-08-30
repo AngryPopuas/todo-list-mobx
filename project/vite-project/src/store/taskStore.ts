@@ -1,5 +1,5 @@
 import { ITask } from "@/types";
-import { AddSubTaskUtil, CreateTaskUtil, SetDoneTasksUtil, RemoveTaskUtil, SetTaskOpenUtil, SelectTaskUtil, SetEditTaskUtil } from "@/utils/task";
+import { AddSubTaskUtil, CreateTaskUtil, SetDoneTasksUtil, RemoveTaskUtil, SetTaskOpenUtil, SelectTaskUtil, SetEditTaskUtil, DeleteAllSelectedTasksUtil, SetDoneAllSelectedTasksUtil } from "@/utils/task";
 import { makeAutoObservable } from "mobx";
 
 class TaskStore {
@@ -35,6 +35,14 @@ class TaskStore {
     }
     removeTask = (id: number) => {
         this.tasks = RemoveTaskUtil(id, this.tasks);
+        localStorage.setItem('tasks-storage', JSON.stringify(this.tasks));
+    }
+    removeAllSelectedTasks = () => {
+        this.tasks = DeleteAllSelectedTasksUtil(this.tasks)
+        localStorage.setItem('tasks-storage', JSON.stringify(this.tasks));
+    }
+    setDoneAllSelectedTasks = () => {
+        this.tasks =  SetDoneAllSelectedTasksUtil(this.tasks)
         localStorage.setItem('tasks-storage', JSON.stringify(this.tasks));
     }
     removeAllTasks = () => {

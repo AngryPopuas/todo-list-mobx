@@ -1,28 +1,10 @@
 import { ITask } from "../types";
 
 
-type AddSubTaskUtil = (
-    id: number,
-    array: ITask[],
-    task: ITask,
-) => ITask[];
-
-type RecursionProps = (
-    id: number,
-    array: ITask[],
-) => ITask[];
 
 
 
-type CompleteTogglerProps = (
-    array: ITask[],
-    state: boolean,
-) => ITask[];
-
-
-
-
-export const CreateTaskUtil = (title: string) => {
+export const CreateTaskUtil = (title: string): ITask => {
     const currentDate = new Date()
     const createdAtLocal = ` ${currentDate.getDate() < 9 ? '0' + currentDate.getDate() : currentDate.getDate()}/${currentDate.getMonth() < 9 ? '0' + Number(currentDate.getMonth() + 1) : Number(currentDate.getMonth() + 1)} в ${currentDate.getHours() < 9 ? '0' + currentDate.getHours() : currentDate.getHours()}:${currentDate.getMinutes() < 9 ? '0' + currentDate.getMinutes() : currentDate.getMinutes()}`
     const createTask: ITask = {
@@ -44,7 +26,7 @@ export const CreateTaskUtil = (title: string) => {
 
 }
 
-export const AddSubTaskUtil: AddSubTaskUtil = (id, array, task) => {
+export const AddSubTaskUtil = (id: number, array: Array<ITask>, task: ITask): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (item.id === id) {
             item.subtasks.push(task);
@@ -57,7 +39,7 @@ export const AddSubTaskUtil: AddSubTaskUtil = (id, array, task) => {
     }, []);
 };
 
-export const RemoveTaskUtil: RecursionProps = (id, array) => {
+export const RemoveTaskUtil = (id: number, array: Array<ITask>): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (item.id !== id) {
             arr.push({ ...item, subtasks: RemoveTaskUtil(id, item.subtasks) });
@@ -67,7 +49,7 @@ export const RemoveTaskUtil: RecursionProps = (id, array) => {
     }, []);
 };
 
-export const SetDoneTasksUtil: RecursionProps = (id, array) => {
+export const SetDoneTasksUtil = (id: number, array: Array<ITask>): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (item.id !== id) {
             arr.push({ ...item, subtasks: SetDoneTasksUtil(id, item.subtasks) });
@@ -83,7 +65,7 @@ export const SetDoneTasksUtil: RecursionProps = (id, array) => {
     }, []);
 };
 
-export const SetDoneSubTasksUtil: CompleteTogglerProps = (array, state) => {
+export const SetDoneSubTasksUtil = (array: Array<ITask>, state: boolean): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         arr.push({
             ...item,
@@ -96,7 +78,7 @@ export const SetDoneSubTasksUtil: CompleteTogglerProps = (array, state) => {
 };
 
 
-export const SelectTaskUtil: RecursionProps = (id, array) => {
+export const SelectTaskUtil = (id: number, array: Array<ITask>): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (item.id !== id) {
             arr.push({ ...item, subtasks: SelectTaskUtil(id, item.subtasks) });
@@ -111,7 +93,7 @@ export const SelectTaskUtil: RecursionProps = (id, array) => {
         return arr;
     }, []);
 };
-export const SelectSubTaskUtil: CompleteTogglerProps = (array, state) => {
+export const SelectSubTaskUtil = (array: Array<ITask>, state: boolean): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         arr.push({
             ...item,
@@ -150,7 +132,7 @@ export const SetTaskOpenUtil = (id: number, array: Array<ITask>): ITask[] => {
     }, [])
 };
 
-export const DeleteAllSelectedTasksUtil = (array: ITask[]) => {
+export const DeleteAllSelectedTasksUtil = (array: ITask[]): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (!item.isSelected) {
             arr.push({ ...item, subtasks: DeleteAllSelectedTasksUtil(item.subtasks) });
@@ -158,7 +140,7 @@ export const DeleteAllSelectedTasksUtil = (array: ITask[]) => {
         return arr;
     }, []);
 };
-export const SetEditTaskUtil = (array: ITask[], task: ITask) => {
+export const SetEditTaskUtil = (array: ITask[], task: ITask): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (item.id === task.id) {
             const editedTask = task
@@ -170,12 +152,15 @@ export const SetEditTaskUtil = (array: ITask[], task: ITask) => {
     }, []);
 };
 
-export const SetDoneAllSelectedTasksUtil = (array: ITask[]) => {
+export const SetDoneAllSelectedTasksUtil = (array: ITask[]): Array<ITask> => {
     return array.reduce((arr: ITask[], item) => {
         if (item.isSelected) {
             item.isDone = !item.isDone
+            arr.push({ ...item, subtasks: SetDoneSubTasksUtil(item.subtasks,item.isDone) });
+        } else {
+            arr.push({ ...item, subtasks: SetDoneAllSelectedTasksUtil(item.subtasks) });
         }
-        arr.push({ ...item, subtasks: SetDoneAllSelectedTasksUtil(item.subtasks) });
         return arr;
     }, []);
 };
+

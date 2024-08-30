@@ -1,5 +1,6 @@
 import CreateTaskForm from './components/business/forms/create-task-form/CreateTaskForm'
 import Header from './components/business/header/Header'
+import TasksActions from './components/business/task/task-actions/TaskActions'
 import TaskInfo from './components/business/task/task-info/TaskInfo'
 import TaskList from './components/business/task/task-list/TaskList'
 
@@ -12,6 +13,9 @@ const App = () => {
       <div className='max-w-[1360px] mx-auto w-full flex flex-row gap-x-5 px-10 mt-5'>
         <div className='flex-1 overflow-y-scroll scrollbar p-5 h-[550px]'>
           <CreateTaskForm />
+          <div className='my-5'>
+            <TasksActions />
+          </div>
           <TaskList />
         </div>
         <div className='flex-1 p-5 h-[400px]'>
