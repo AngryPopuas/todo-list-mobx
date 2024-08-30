@@ -123,18 +123,31 @@ export const SelectSubTaskUtil: CompleteTogglerProps = (array, state) => {
     }, []);
 };
 
-// Delete selected or set done
+export const GetOpenedTaskUtil = (array: Array<ITask>): ITask | null => {
+    for (let item of array) {
+        if (item.isOpen) {
+            return item;
+        }
 
-export const SetTaskOpenUtil = (id: number, array: Array<ITask>): ITask[]=> {
+        const subItem = GetOpenedTaskUtil(item.subtasks);
+
+        if (subItem) {
+            return subItem;
+        }
+    }
+
+    return null;
+}
+export const SetTaskOpenUtil = (id: number, array: Array<ITask>): ITask[] => {
     return array.reduce((arr: ITask[], item) => {
-            if (item.id === id) {
-                item.isOpen = !item.isOpen
-            } else {
-                item.isOpen = false
-            }
-            arr.push({ ...item, subtasks: SetTaskOpenUtil(id, item.subtasks)});
-            return arr;
-        }, [])    
+        if (item.id === id) {
+            item.isOpen = !item.isOpen
+        } else {
+            item.isOpen = false
+        }
+        arr.push({ ...item, subtasks: SetTaskOpenUtil(id, item.subtasks) });
+        return arr;
+    }, [])
 };
 
 export const DeleteAllSelectedTasksUtil = (array: ITask[]) => {
@@ -145,17 +158,17 @@ export const DeleteAllSelectedTasksUtil = (array: ITask[]) => {
         return arr;
     }, []);
 };
-// export const setEditTask = (array: ITask[], task: ITask) => {
-//     return array.reduce((arr: ITask[], item) => {
-//         if (item.id === task.id) {
-//             const editedTask = task
-//             arr.push({ ...editedTask, subtasks: setEditTask(item.subtasks, task) });
-//         } else {
-//             arr.push({ ...item, subtasks: setEditTask(item.subtasks, task) });
-//         }
-//         return arr;
-//     }, []);
-// };
+export const SetEditTaskUtil = (array: ITask[], task: ITask) => {
+    return array.reduce((arr: ITask[], item) => {
+        if (item.id === task.id) {
+            const editedTask = task
+            arr.push({ ...editedTask, subtasks: SetEditTaskUtil(item.subtasks, task) });
+        } else {
+            arr.push({ ...item, subtasks: SetEditTaskUtil(item.subtasks, task) });
+        }
+        return arr;
+    }, []);
+};
 // export const setOpenTaskForEdit = (array: ITask[]) => {
 //     return array.reduce((arr: ITask[], item) => {
 //         if (item.isSelected) {

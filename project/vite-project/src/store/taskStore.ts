@@ -1,5 +1,5 @@
 import { ITask } from "@/types";
-import { AddSubTaskUtil, CreateTaskUtil, SetDoneTasksUtil, RemoveTaskUtil, SetTaskOpenUtil, SelectTaskUtil } from "@/utils/task";
+import { AddSubTaskUtil, CreateTaskUtil, SetDoneTasksUtil, RemoveTaskUtil, SetTaskOpenUtil, SelectTaskUtil, GetOpenedTaskUtil, SetEditTaskUtil } from "@/utils/task";
 import { makeAutoObservable } from "mobx";
 
 class TaskStore {
@@ -13,13 +13,16 @@ class TaskStore {
         this.tasks = SelectTaskUtil(id, this.tasks)
     }
     addSubTask = (id: number) => {
-        this.tasks = AddSubTaskUtil(id, this.tasks, CreateTaskUtil('new task'))
-    } 
+        this.tasks = AddSubTaskUtil(id, this.tasks, CreateTaskUtil('Новая подзадача'))
+    }
     setOpenTask = (id: number) => {
         this.tasks = SetTaskOpenUtil(id, this.tasks)
     }
     setDoneTasks = (id: number) => {
         this.tasks = SetDoneTasksUtil(id, this.tasks);
+    }
+    setEditTask = (task: ITask) => {
+        this.tasks = SetEditTaskUtil(this.tasks, task)
     }
     addTask = (task: ITask) => {
         this.tasks.push(task)

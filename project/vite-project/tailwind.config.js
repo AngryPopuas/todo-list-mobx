@@ -18,6 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        taskBorder: "hsl(var(--task-border))",
+        subtask: "hsl(var(--sub-task-bg))",
         task: "hsl(var(--task-bg))",
         input: "hsl(var(--input))",
         header: "hsl(var(--header))",

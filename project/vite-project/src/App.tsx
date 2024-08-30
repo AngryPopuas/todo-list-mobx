@@ -1,5 +1,6 @@
 import CreateTaskForm from './components/business/forms/create-task-form/CreateTaskForm'
 import Header from './components/business/header/Header'
+import ModalsOverlay from './components/business/modals/ModalsOverlay'
 import TaskInfo from './components/business/task/task-info/TaskInfo'
 import TaskList from './components/business/task/task-list/TaskList'
 
