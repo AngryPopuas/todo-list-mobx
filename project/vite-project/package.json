@@ -1,9 +1,12 @@
 {
+  "homepage": "https://AngryPopuas.github.io/vite-project",
   "name": "vite-project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -17,6 +20,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "gh-pages": "^6.1.1",
     "lucide-react": "^0.436.0",
     "mobx": "^6.13.1",
     "mobx-react-lite": "^4.0.7",
